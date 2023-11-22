@@ -1,0 +1,161 @@
+provides:
+{
+    api:
+    {
+        airVantage/le_avc.api
+        airVantage/le_avdata.api
+    }
+}
+
+requires:
+{
+    api:
+    {
+        le_instStat.api
+        le_appRemove.api
+        le_appCtrl.api
+        le_cfg.api
+        le_data.api
+        le_ulpm.api
+        modemServices/le_info.api
+        modemServices/le_ips.api
+        modemServices/le_mdc.api
+        modemServices/le_mrc.api
+        modemServices/le_rtc.api
+        modemServices/le_sim.api
+        modemServices/le_sms.api
+        modemServices/le_temp.api
+        positioning/le_gnss.api
+        positioning/le_pos.api
+        le_appInfo.api
+        le_fwupdate.api
+        le_update.api
+        secStoreGlobal = le_secStore.api
+    }
+
+    component:
+    {
+        $LEGATO_AVC_PA_DEFAULT
+        ${LEGATO_ROOT}/components/3rdParty/tinydtls
+        $LEGATO_ROOT/framework/c/src/appCfg
+    }
+}
+
+sources:
+{
+    assetData.c
+    avData.c
+    avcServer.c
+    timeseriesData.c
+    push.c
+    avcFs.c
+    // AVC
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/avcClient.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/osPortConnectivity.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/osPortDevice.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/osPortLocation.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/osPortSecurity.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/osPortUpdate.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/osPortParamStorage.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcAppUpdate/avcAppUpdate.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/packageDownloader/sslUtilities.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/packageDownloader/packageDownloaderCallbacks.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/packageDownloader/packageDownloader.c
+
+    // LWM2MCore: Adaptation layer
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/os/legato/osDebug.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/os/legato/osPlatform.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/os/legato/osTime.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/os/legato/osTimer.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/os/legato/osUdp.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/os/legato/osSem.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/os/legato/osMutex.c
+    ${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient/os/legato/osConfig.c
+
+    // LWM2MCore
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/sessionManager/dtlsConnection.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/sessionManager/lwm2mcoreSession.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/objectManager/objects.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/objectManager/objectsTable.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/objectManager/handlers.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/objectManager/utils.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/packageDownloader/lwm2mcorePackageDownloader.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/packageDownloader/workspace.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/objectManager/lwm2mcoreCoapHandlers.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/security/lwm2mcoreSecurity.c
+
+
+    // Wakaama
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/er-coap-13/er-coap-13.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/bootstrap.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/block1.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/data.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/discover.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/json.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/liblwm2m.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/list.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/management.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/objects.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/observe.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/packet.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/registration.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/tlv.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/transaction.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/uri.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/utils.c
+
+    // tinyDTLS
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/dtls.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/crypto.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/ccm.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/hmac.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/dtls_debug.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/netq.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/peer.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/dtls_time.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/session.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/sha2/sha2.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/aes/rijndael.c
+    ${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls/ecc/ecc.c
+}
+
+cflags:
+{
+    -I${LEGATO_ROOT}/components/airVantage/platformAdaptor/inc
+    -I${LEGATO_ROOT}/framework/c/src
+    -I${LEGATO_ROOT}/framework/c/src/appCfg
+    -I${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcDaemon
+    -I${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcAppUpdate
+    -I${LEGATO_ROOT}/apps/platformServices/airVantageConnector/avcClient
+    -I${LEGATO_ROOT}/apps/platformServices/airVantageConnector/packageDownloader
+    -I${LEGATO_ROOT}/3rdParty/Lwm2mCore/include
+    -I${LEGATO_ROOT}/3rdParty/Lwm2mCore/include/platform-specific/linux
+    -I${LEGATO_ROOT}/3rdParty/Lwm2mCore/sessionManager
+    -I${LEGATO_ROOT}/3rdParty/Lwm2mCore/objectManager
+    -I${LEGATO_ROOT}/3rdParty/Lwm2mCore/packageDownloader
+    -I${LEGATO_ROOT}/3rdParty/Lwm2mCore/tinydtls
+    -I${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core
+    -I${LEGATO_ROOT}/3rdParty/Lwm2mCore/wakaama/core/er-coap-13
+    -DLWM2M_CLIENT_MODE
+    -DLWM2M_LITTLE_ENDIAN
+    -DLWM2M_BOOTSTRAP
+    -DLWM2M_OLD_CONTENT_FORMAT_SUPPORT
+    -DLEGATO_LWM2M_CLIENT
+    -DWITH_TINYDTLS
+    -DLWM2M_WITH_LOGS
+    -DWITH_LOGS
+    -DSIERRA
+    -w
+    -std=gnu99
+    -DWITH_SHA256
+}
+
+ldflags:
+{
+    -lcurl
+    -lz
+    -lssl
+    -lcrypto
+    -ltinycbor
+}
+

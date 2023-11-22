@@ -1,0 +1,33 @@
+sandboxed: false
+
+executables:
+{
+    atClientDaemon = ( $LEGATO_ROOT/components/atServices/atClient )
+    atServerDaemon = ( $LEGATO_ROOT/components/atServices/atServer )
+    atBinderDaemon = ( $LEGATO_ROOT/components/atServices/atBinder )
+}
+
+processes:
+{
+    run:
+    {
+        (atClientDaemon)
+        (atServerDaemon)
+        (atBinderDaemon)
+    }
+    maxFileBytes: 5000K
+    faultAction: restart
+}
+
+bindings:
+{
+    atServerDaemon.atServer.le_atClient -> atClientDaemon.atClient.le_atClient
+    atBinderDaemon.atBinder.le_atServer -> atServerDaemon.atServer.le_atServer
+}
+
+extern:
+{
+    atServerDaemon.atServer.le_atServer
+    atClientDaemon.atClient.le_atClient
+}
+

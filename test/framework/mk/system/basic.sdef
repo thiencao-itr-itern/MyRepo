@@ -1,0 +1,28 @@
+apps:
+{
+    $APP1
+}
+
+buildVars:
+{
+    APP1 = app1
+    CLIENT = client
+}
+
+apps:
+{
+    #include "app2.inc"
+}
+
+bindings:
+{
+    <foo>.client -> app2.server
+    app1.client -> app2.server
+    app2.client -> <baz>.server
+    <bar>.client -> <baz>.server
+}
+
+bindings:
+{
+    app2.client -> <baz>.server
+}

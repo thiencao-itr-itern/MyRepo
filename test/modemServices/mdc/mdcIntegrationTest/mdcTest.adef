@@ -1,0 +1,30 @@
+sandboxed: false
+
+executables:
+{
+    mdcTest = ( mdcTestComp )
+}
+
+maxFileSystemBytes: 256K
+
+processes:
+{
+    envVars:
+    {
+        LE_LOG_LEVEL = DEBUG
+    }
+
+    run:
+    {
+        ( mdcTest )
+    }
+}
+
+start: manual
+
+bindings:
+{
+    mdcTest.mdcTestComp.le_mdc -> modemService.le_mdc
+}
+
+

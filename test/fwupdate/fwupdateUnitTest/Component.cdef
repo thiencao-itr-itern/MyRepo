@@ -1,0 +1,13 @@
+requires:
+{
+    api:
+    {
+        le_fwupdate.api         [types-only]
+        le_flash.api            [types-only]
+    }
+}
+
+sources:
+{
+    main.c
+}

@@ -1,0 +1,32 @@
+sandboxed: false
+
+bundles:
+{
+    file:
+    {
+        // Only package gdbserver if it is provided by the toolchain.
+        #if file_exists($LEGATO_SYSROOT/usr/bin/gdbserver)
+            [rx] $LEGATO_SYSROOT/usr/bin/gdbserver        /bin/gdbserver
+        #endif
+    }
+}
+
+executables:
+{
+    devMode = ( $LEGATO_ROOT/components/devMode/devMode )
+}
+
+processes:
+{
+    run:
+    {
+        ( devMode )
+    }
+}
+
+bindings:
+{
+    devMode.devMode.le_pm -> powerMgr.le_pm
+    devMode.devMode.le_updateCtrl -> <root>.le_updateCtrl
+    devMode.devMode.le_instStat -> <root>.le_instStat
+}

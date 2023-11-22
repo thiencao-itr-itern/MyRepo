@@ -1,0 +1,26 @@
+
+sandboxed: false
+
+executables:
+{
+    fwupdateDaemon = ( $LEGATO_ROOT/components/fwupdate/fwupdateDaemon )
+}
+
+processes:
+{
+    run:
+    {
+        (fwupdateDaemon)
+    }
+
+    faultAction: restart
+    maxFileBytes: 2000K
+}
+
+extern:
+{
+    fwupdateDaemon.fwupdateDaemon.le_fwupdate
+    fwupdateDaemon.fwupdateDaemon.le_dualsys
+    fwupdateDaemon.fwupdateDaemon.le_flash
+}
+

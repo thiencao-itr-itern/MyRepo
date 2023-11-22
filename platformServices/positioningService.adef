@@ -1,0 +1,31 @@
+sandboxed: false
+
+executables:
+{
+    posDaemon = ( $LEGATO_ROOT/components/positioning/posDaemon )
+}
+
+processes:
+{
+    run:
+    {
+        (posDaemon)
+    }
+
+    faultAction: restart
+}
+
+requires:
+{
+    configTree:
+    {
+        [w] .
+    }
+}
+
+extern:
+{
+    posDaemon.posDaemon.le_gnss
+    posDaemon.posDaemon.le_pos
+    posDaemon.posDaemon.le_posCtrl
+}
